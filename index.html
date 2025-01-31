@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>رزومه هکری - سید یاسین بنی هاشمی</title>
+    <style>
+        body {
+            background-color: black;
+            color: #00ff00;
+            font-family: monospace;
+            text-align: left;
+            padding: 20px;
+        }
+        #terminal {
+            width: 80%;
+            height: 60vh;
+            overflow-y: auto;
+            border: 2px solid #00ff00;
+            padding: 10px;
+            margin: auto;
+            white-space: pre-wrap;
+            background: rgba(0, 0, 0, 0.8);
+        }
+        #input {
+            background: black;
+            border: none;
+            color: #00ff00;
+            font-family: monospace;
+            font-size: 18px;
+            width: 100%;
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>رزومه هکری - سید یاسین بنی هاشمی</h1>
+    <div id="terminal">
+        <p>Welcome to my terminal-based resume...</p>
+        <p>Type "help" to see available commands.</p>
+    </div>
+    <input type="text" id="input" autofocus>
+    <script>
+        const terminal = document.getElementById("terminal");
+        const input = document.getElementById("input");
+        const commands = {
+            help: "Available commands: help, about, skills, contact",
+            about: "Name: سید یاسین بنی هاشمی\nTitle: Web Developer & Programmer\nExperience: 3+ years",
+            skills: "HTML, CSS, JavaScript, Python, Node.js, Ethical Hacking",
+            contact: "Email: seidyasin174@gmail.com\nGitHub: github.com/example"
+        };
+        
+        input.addEventListener("keydown", function(event) {
+            if (event.key === "Enter") {
+                let command = input.value.trim();
+                terminal.innerHTML += "\n> " + command + "\n";
+                
+                if (commands[command]) {
+                    terminal.innerHTML += commands[command] + "\n";
+                } else {
+                    terminal.innerHTML += "Unknown command. Type 'help' for a list of commands.\n";
+                }
+                terminal.scrollTop = terminal.scrollHeight;
+                input.value = "";
+            }
+        });
+    </script>
+</body>
+</html>
+
+
