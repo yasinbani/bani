@@ -1,68 +1,161 @@
 <!DOCTYPE html>
-<html lang="fa">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>رزومه هکری - سید یاسین بنی هاشمی</title>
-    <style>
-        body {
-            background-color: black;
-            color: #00ff00;
-            font-family: monospace;
-            text-align: left;
-            padding: 20px;
-        }
-        #terminal {
-            width: 80%;
-            height: 60vh;
-            overflow-y: auto;
-            border: 2px solid #00ff00;
-            padding: 10px;
-            margin: auto;
-            white-space: pre-wrap;
-            background: rgba(0, 0, 0, 0.8);
-        }
-        #input {
-            background: black;
-            border: none;
-            color: #00ff00;
-            font-family: monospace;
-            font-size: 18px;
-            width: 100%;
-            outline: none;
-        }
-    </style>
+    <title>Stylish Portal</title>
+    <link rel="stylesheet" href="صفحه ورد خففنننننن.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1>رزومه هکری - سید یاسین بنی هاشمی</h1>
-    <div id="terminal">
-        <p>Welcome to my terminal-based resume...</p>
-        <p>Type "help" to see available commands.</p>
-    </div>
-    <input type="text" id="input" autofocus>
-    <script>
-        const terminal = document.getElementById("terminal");
-        const input = document.getElementById("input");
-        const commands = {
-            help: "Available commands: help, about, skills, contact",
-            about: "Name: سید یاسین بنی هاشمی\nTitle: Web Developer & Programmer\nExperience: 3+ years",
-            skills: "HTML, CSS, JavaScript, Python, Node.js, Ethical Hacking",
-            contact: "Email: seidyasin174@gmail.com\nGitHub: github.com/example"
-        };
-        
-        input.addEventListener("keydown", function(event) {
-            if (event.key === "Enter") {
-                let command = input.value.trim();
-                terminal.innerHTML += "\n> " + command + "\n";
+    <div id="particles-js"></div>
+    
+    <div class="container">
+        <div class="form-box">
+            <h2>Login</h2>
+            <p>Welcome Back</p>
+            
+            <form>
+                <div class="input-group">
+                    <input type="text" id="username" required class="input-field">
+                    <label for="username">Username</label>
+                    <div class="glow-line"></div>
+                </div>
                 
-                if (commands[command]) {
-                    terminal.innerHTML += commands[command] + "\n";
-                } else {
-                    terminal.innerHTML += "Unknown command. Type 'help' for a list of commands.\n";
-                }
-                terminal.scrollTop = terminal.scrollHeight;
-                input.value = "";
-            }
+                <div class="input-group">
+                    <input type="password" id="password" required class="input-field">
+                    <label for="password">Password</label>
+                    <div class="glow-line"></div>
+                </div>
+                
+                <div class="remember-forgot">
+                    <div class="remember">
+                        <input type="checkbox" id="remember">
+                        <label for="remember">Remember me</label>
+                    </div>
+                    <a href="#" class="forgot">Forgot Password?</a>
+                </div>
+                
+                <button type="submit" class="login-btn">
+                    <span>SIGN IN</span>
+                    <div class="btn-glow"></div>
+                </button>
+                
+                <div class="signup-link">
+                    Don't have an account? <a href="#">Register</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            particlesJS('particles-js', {
+                "particles": {
+                    "number": {
+                        "value": 100,
+                        "density": {
+                            "enable": true,
+                            "value_area": 800
+                        }
+                    },
+                    "color": {
+                        "value": "#00d4ff"
+                    },
+                    "shape": {
+                        "type": "circle",
+                        "stroke": {
+                            "width": 0,
+                            "color": "#000000"
+                        },
+                        "polygon": {
+                            "nb_sides": 5
+                        }
+                    },
+                    "opacity": {
+                        "value": 0.8,
+                        "random": true,
+                        "anim": {
+                            "enable": true,
+                            "speed": 1,
+                            "opacity_min": 0.4,
+                            "sync": false
+                        }
+                    },
+                    "size": {
+                        "value": 5,
+                        "random": true,
+                        "anim": {
+                            "enable": true,
+                            "speed": 2,
+                            "size_min": 1,
+                            "sync": false
+                        }
+                    },
+                    "line_linked": {
+                        "enable": true,
+                        "distance": 150,
+                        "color": "#00d4ff",
+                        "opacity": 0.6,
+                        "width": 1.5
+                    },
+                    "move": {
+                        "enable": true,
+                        "speed": 2,
+                        "direction": "none",
+                        "random": true,
+                        "straight": false,
+                        "out_mode": "out",
+                        "bounce": false,
+                        "attract": {
+                            "enable": true,
+                            "rotateX": 600,
+                            "rotateY": 1200
+                        }
+                    }
+                },
+                "interactivity": {
+                    "detect_on": "canvas",
+                    "events": {
+                        "onhover": {
+                            "enable": true,
+                            "mode": "repulse"
+                        },
+                        "onclick": {
+                            "enable": true,
+                            "mode": "push"
+                        },
+                        "resize": true
+                    },
+                    "modes": {
+                        "grab": {
+                            "distance": 400,
+                            "line_linked": {
+                                "opacity": 1
+                            }
+                        },
+                        "bubble": {
+                            "distance": 400,
+                            "size": 40,
+                            "duration": 2,
+                            "opacity": 8,
+                            "speed": 3
+                        },
+                        "repulse": {
+                            "distance": 100,
+                            "duration": 0.4
+                        },
+                        "push": {
+                            "particles_nb": 4
+                        },
+                        "remove": {
+                            "particles_nb": 2
+                        }
+                    }
+                },
+                "retina_detect": true
+            });
         });
     </script>
 </body>
