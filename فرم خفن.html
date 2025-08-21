@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern 3D Login & Registration</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .form-container {
+            perspective: 1000px;
+        }
+        
+        .form-box {
+            transform-style: preserve-3d;
+            transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .form-box.flipped {
+            transform: rotateY(180deg);
+        }
+        
+        .form-front, .form-back {
+            backface-visibility: hidden;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .form-back {
+            transform: rotateY(180deg);
+        }
+        
+        .input-group {
+            position: relative;
+            margin-bottom: 25px;
+        }
+        
+        .input-field {
+            width: 100%;
+            padding: 15px 15px 15px 45px;
+            border: none;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            font-size: 16px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .input-field:focus {
+            outline: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .input-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #667eea;
+            font-size: 18px;
+        }
+        
+        .btn {
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin: 0 10px;
+            color: white;
+            font-size: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .social-icon:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .toggle-btn {
+            background: transparent;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-weight: 500;
+            text-decoration: underline;
+            transition: all 0.3s ease;
+        }
+        
+        .toggle-btn:hover {
+            color: #f6f7f9;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+        }
+        
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(255, 255, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center p-4">
+    <div class="absolute top-10 left-10 w-20 h-20 rounded-full bg-white opacity-10 floating"></div>
+    <div class="absolute bottom-20 right-20 w-32 h-32 rounded-full bg-white opacity-10 floating" style="animation-delay: 0.5s;"></div>
+    <div class="absolute top-1/3 right-1/4 w-16 h-16 rounded-full bg-white opacity-10 floating" style="animation-delay: 1s;"></div>
+    
+    <div class="form-container w-full max-w-md">
+        <div class="form-box relative w-full h-auto p-10">
+            <!-- Front Side - Login Form -->
+            <div class="form-front">
+                <div class="text-center mb-10">
+                    <div class="w-24 h-24 mx-auto mb-4 rounded-full bg-white flex items-center justify-center shadow-lg pulse">
+                        <i class="fas fa-user text-4xl text-indigo-600"></i>
+                    </div>
+                    <h2 class="text-3xl font-bold text-white mb-2">Welcome Back</h2>
+                    <p class="text-white opacity-80">Login to access your account</p>
+                </div>
+                
+                <form>
+                    <div class="input-group">
+                        <i class="input-icon fas fa-envelope"></i>
+                        <input type="email" class="input-field" placeholder="Email Address" required>
+                    </div>
+                    
+                    <div class="input-group">
+                        <i class="input-icon fas fa-lock"></i>
+                        <input type="password" class="input-field" placeholder="Password" required>
+                    </div>
+                    
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="flex items-center">
+                            <input type="checkbox" id="remember" class="w-4 h-4 text-indigo-600 rounded focus:ring-indigo-500">
+                            <label for="remember" class="ml-2 text-sm text-white">Remember me</label>
+                        </div>
+                        <a href="#" class="text-sm text-white hover:underline">Forgot password?</a>
+                    </div>
+                    
+                    <button type="submit" class="btn w-full bg-white text-indigo-600 hover:bg-gray-100 mb-6">
+                        Login
+                    </button>
+                    
+                    <div class="text-center mb-6">
+                        <span class="text-white">Or login with</span>
+                    </div>
+                    
+                    <div class="flex justify-center mb-6">
+                        <a href="#" class="social-icon bg-blue-600 hover:bg-blue-700">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-icon bg-red-600 hover:bg-red-700">
+                            <i class="fab fa-google"></i>
+                        </a>
+                        <a href="#" class="social-icon bg-blue-400 hover:bg-blue-500">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </div>
+                    
+                    <div class="text-center text-white">
+                        Don't have an account? 
+                        <button type="button" onclick="flipForm()" class="toggle-btn">Sign up</button>
+                    </div>
+                </form>
+            </div>
+            
+            <!-- Back Side - Registration Form -->
+            <div class="form-back">
+                <div class="text-center mb-10">
+                    <div class="w-24 h-24 mx-auto mb-4 rounded-full bg-white flex items-center justify-center shadow-lg pulse">
+                        <i class="fas fa-user-plus text-4xl text-indigo-600"></i>
+                    </div>
+                    <h2 class="text-3xl font-bold text-white mb-2">Create Account</h2>
+                    <p class="text-white opacity-80">Join us today</p>
+                </div>
+                
+                <form>
+                    <div class="input-group">
+                        <i class="input-icon fas fa-user"></i>
+                        <input type="text" class="input-field" placeholder="Full Name" required>
+                    </div>
+                    
+                    <div class="input-group">
+                        <i class="input-icon fas fa-envelope"></i>
+                        <input type="email" class="input-field" placeholder="Email Address" required>
+                    </div>
+                    
+                    <div class="input-group">
+                        <i class="input-icon fas fa-lock"></i>
+                        <input type="password" class="input-field" placeholder="Password" required>
+                    </div>
+                    
+                    <div class="input-group">
+                        <i class="input-icon fas fa-lock"></i>
+                        <input type="password" class="input-field" placeholder="Confirm Password" required>
+                    </div>
+                    
+                    <div class="flex items-center mb-6">
+                        <input type="checkbox" id="terms" class="w-4 h-4 text-indigo-600 rounded focus:ring-indigo-500" required>
+                        <label for="terms" class="ml-2 text-sm text-white">
+                            I agree to the <a href="#" class="underline">Terms & Conditions</a>
+                        </label>
+                    </div>
+                    
+                    <button type="submit" class="btn w-full bg-white text-indigo-600 hover:bg-gray-100 mb-6">
+                        Sign Up
+                    </button>
+                    
+                    <div class="text-center text-white">
+                        Already have an account? 
+                        <button type="button" onclick="flipForm()" class="toggle-btn">Login</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function flipForm() {
+            const formBox = document.querySelector('.form-box');
+            formBox.classList.toggle('flipped');
+        }
+        
+        // Add ripple effect to buttons
+        document.querySelectorAll('.btn, .social-icon').forEach(button => {
+            button.addEventListener('click', function(e) {
+                const x = e.clientX - e.target.getBoundingClientRect().left;
+                const y = e.clientY - e.target.getBoundingClientRect().top;
+                
+                const ripple = document.createElement('span');
+                ripple.className = 'ripple';
+                ripple.style.left = `${x}px`;
+                ripple.style.top = `${y}px`;
+                
+                this.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 1000);
+            });
+        });
+        
+        // Add focus effects to input fields
+        document.querySelectorAll('.input-field').forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentNode.querySelector('.input-icon').style.color = '#764ba2';
+                this.style.transform = 'translateY(-2px)';
+            });
+            
+            input.addEventListener('blur', function() {
+                this.parentNode.querySelector('.input-icon').style.color = '#667eea';
+                this.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+</body>
+</html>
